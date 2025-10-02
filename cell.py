@@ -17,7 +17,7 @@ class Cell:
         text = tk.Label(bg, text= self.text, fg=self.color, bg= self.bgcolor, font= ("Arial", 10))
         text.pack(expand= True)     
 
-root = tk.Tk()
+'''root = tk.Tk()
 
 for i in range(0, 8):
     for j in range(0, 8):
@@ -32,4 +32,4 @@ for i in range(0, 8):
         cell = Cell(root=root, text=str((i, j)), row=j, column=i, bgcolor= bg, color= fg) 
         cell.render()
 
-root.mainloop()
+root.mainloop()'''
