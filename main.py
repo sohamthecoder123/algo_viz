@@ -83,8 +83,6 @@ while True:
         print("Was found: ", is_found)
         break
 
-
-
 root.mainloop()
 
 '''
