@@ -13,9 +13,10 @@ class Cell:
     def render(self):
         bg = tk.Frame(self.root, width= self.size, height=self.size, bg=self.bgcolor)
         bg.grid(row=self.row, column= self.column)
+        bg.grid_propagate(False)
 
         text = tk.Label(bg, text= self.text, fg=self.color, bg= self.bgcolor, font= ("Arial", 10))
-        text.pack(expand= True)     
+        text.place(relx=0.5,  rely=0.5, anchor="center")   
 
 '''root = tk.Tk()
 
