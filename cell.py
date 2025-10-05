@@ -9,7 +9,7 @@ import tkinter as tk;
 class Cell:
 
     #constructor with default values
-    def __init__(self, root, text="", row=1, column=1, size=40, bgcolor="#FFFFFF", color="#000000"):
+    def __init__(self, root, text="", row=1, column=1, size=40, bgcolor="#FFFFFF", color="#000000", font=('Arial', 18)):
 
         self.root = root #the root of our cell in the tkinter sense
         self.text = text #the text of our cell
@@ -18,6 +18,7 @@ class Cell:
         self.size = size #the size (width = height as our cell is a square) of our cell
         self.bgcolor = bgcolor #the background color of our cell, Default = white
         self.color = color #the color of the text. Default = black
+        self.font = font #the font of the text
     
 
     #rendering function
@@ -29,7 +30,7 @@ class Cell:
         bg.grid_propagate(False) #don't propagate down (ie, don't let the size of the text determine the size of the cell)
 
         #the text
-        text = tk.Label(bg, text= self.text, fg=self.color, bg= self.bgcolor, font= ("Arial", 10))
+        text = tk.Label(bg, text= self.text, fg=self.color, bg= self.bgcolor, font=self.font)
         text.place(relx=0.5,  rely=0.5, anchor="center")#place it at the center
 
 
