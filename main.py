@@ -1,5 +1,5 @@
 import tkinter as tk #ignore for now
-
+from cell_array import CellArray
 
 '''
 main file

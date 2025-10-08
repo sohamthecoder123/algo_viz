@@ -7,10 +7,8 @@ import tkinter as tk;
 
 #Cell class
 class Cell:
-
     #constructor with default values
     def __init__(self, root, text="", row=1, column=1, size=40, bgcolor="#FFFFFF", color="#000000", font=('Arial', 18)):
-
         self.root = root #the root of our cell in the tkinter sense
         self.text = text #the text of our cell
         self.row = row #the row number of our cell as it is going to be in a grid
@@ -19,11 +17,9 @@ class Cell:
         self.bgcolor = bgcolor #the background color of our cell, Default = white
         self.color = color #the color of the text. Default = black
         self.font = font #the font of the text
-    
 
     #rendering function
     def render(self):
-
         #set up the background
         bg = tk.Frame(self.root, width= self.size, height=self.size, bg=self.bgcolor)
         bg.grid(row=self.row, column= self.column) #set it to grid

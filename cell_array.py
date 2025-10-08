@@ -9,11 +9,10 @@ import time
 
 #CellArray class
 class CellArray:
-
     #constructor 
-    def __init__(self, root, array:list[cell.Cell] = [], bgColor:str = "white", textColor:str = "black", size:int = 40, font=('Arial', 18)):
+    def __init__(self, root, array:list[cell.Cell] = None, bgColor:str = "white", textColor:str = "black", size:int = 40, font=('Arial', 18)):
         self.root = root #root 
-        self.array = array #array is the list on which the CellArray is built on
+        self.array = None if array == None else array #array is the list on which the CellArray is built on
         self.bgColor = bgColor #the background color of the cell
         self.textColor = textColor #the color of the text
         self.size = size #size of the cells
@@ -43,8 +42,8 @@ class CellArray:
 
         self.root.after(10, self.render()) #render it again after a short delay to prevent the jitter when the objects are deleted from becoming noticeable
 
-#test code          
-'''l1 = [1, 2, 3, 4]
+'''#test code          
+l1 = [1, 2, 3, 4]
 l2 = [5, 6, 7]
 
 root = tk.Tk()
@@ -53,7 +52,8 @@ cellArray = CellArray(root= root, array= l1, bgColor="blue", textColor="red", si
 cellArray.render()
 
 nextButton = tk.Button(root, text= "Next", command= lambda: cellArray.update(l2))
-nextButton.grid(row=2, column=2, pady=10)
+nextButton.grid(row=1, column= len(cellArray.array) + 1)
 
 root.mainloop()
+
 '''
