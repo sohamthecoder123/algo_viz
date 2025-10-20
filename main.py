@@ -14,9 +14,9 @@ root.title("Algorithm Visualizer")
 label = tk.Label(root, text="Binary Search Visualizer", font=('Arial', 18))
 label.pack(padx = 20, pady = 20)
 
-array = [1, 3, 4, 19, 23, 45, 67] #array on which the bs algo is to be run
+array_test = [1, 2, 3, 4, 5, 6, 7, 8, 9] #array on which the bs algo is to be run
 
-value = 3 #the value being 
+value = 5 #the value being searched for 
 
 i = 0 #index/no of steps
 
@@ -25,12 +25,49 @@ limit_reached = False
 is_found = False
 
 #low and high fingers
-low = 0
-high = len(array)
+#low = 0
+#high = len(array)
 
-#ignore for now
+def binary_search_step(array: list[int], value: int):
+    print("Hello")
+    low = 0
+    high = len(array) - 1
+    mid = (low + high)//2 #calculate mid value
+
+    mid_value = array[mid]
+
+    if mid_value < value: 
+        low = mid + 1
+    elif mid_value > value:
+        high = mid - 1
+
+    return array[low:high]
+
+
+#frame for the array
 array_frame = tk.Frame(root)
 
+cells = CellArray(root= array_frame, array= array_test)
+cells.render()
+
+array_frame.pack()
+
+button_frame = tk.Frame(root)
+
+def btnFunction():
+    global array_test
+    new_array = binary_search_step(array_test, value)
+    array_test = new_array
+    cells.update(array_test)
+
+nextButton = tk.Button(root, text= "Next", command= lambda: btnFunction())
+
+nextButton.pack()
+
+button_frame.pack()
+
+
+'''
 #the while loop
 while True:
     i += 1 #increment i by 1
@@ -67,5 +104,8 @@ while True:
         print("No of steps: ", i)
         print("Was found: ", is_found)
         break
+    
+'''
+
 
 root.mainloop() #ignore for now
