@@ -1,4 +1,4 @@
-import tkinter as tk #ignore for now
+import tkinter as tk
 from cell_array import CellArray
 
 '''
@@ -8,7 +8,7 @@ Currently I haven't integrated it w/ tkinter - Soham
 '''
 
 root = tk.Tk()
-root.geometry("1024x1024")
+root.geometry("1024x600") # 1024 height is too much, and who likes a square window anyway?
 root.title("Algorithm Visualizer")
 
 label = tk.Label(root, text="Binary Search Visualizer", font=('Arial', 18))
@@ -21,33 +21,56 @@ value = 5 #the value being searched for
 i = 0 #index/no of steps
 
 #some vars for visualization
-limit_reached = False
+search_finished = False
 is_found = False
 
 #low and high fingers
-#low = 0
-#high = len(array)
+low = 0
+mid = None
+high = len(array_test)-1
 
 def binary_search_step(array: list[int], value: int):
-    print("Hello")
-    low = 0
-    high = len(array) - 1
-    mid = (low + high)//2 #calculate mid value
+    global low, high, search_finished, is_found, mid
 
+    if search_finished: return
+    elif mid is None:
+        mid = mid = (low + high)//2
+        cells.update(low=low, mid=mid, high=high)
+        return
+
+    mid = (low + high)//2 #calculate mid value
     mid_value = array[mid]
 
-    if mid_value < value: 
+    cells.update(low=low, mid=mid, high=high)
+
+    if mid_value == value:
+        is_found = True
+        search_finished = True
+        nextButton.config(text="Found!", state="disabled")
+    elif low >= high:
+        search_finished = True
+        nextButton.config(text="Not Found", state="disabled")
+    elif mid_value < value:
         low = mid + 1
-    elif mid_value > value:
+    else: # mid_value > value:
         high = mid - 1
 
-    return array[low:high]
+    # NOTE: @soham, do not return a new array. The array should remain the same,
+    # and only the position of pointers should change
+    # return array[low:high]
 
 
 #frame for the array
 array_frame = tk.Frame(root)
 
-cells = CellArray(root= array_frame, array= array_test)
+cells = CellArray(
+    root= array_frame,
+    array= array_test,
+    size=50,
+    bg_color="#FFF",
+    text_color="#000",
+    font=('Arial', 18)
+)
 cells.render()
 
 array_frame.pack()
@@ -55,10 +78,9 @@ array_frame.pack()
 button_frame = tk.Frame(root)
 
 def btnFunction():
-    global array_test
-    new_array = binary_search_step(array_test, value)
-    array_test = new_array
-    cells.update(array_test)
+    global low, mid, high, array_test, value
+    binary_search_step(array_test, value)
+    cells.update(low=low, mid=mid, high=high)
 
 nextButton = tk.Button(root, text= "Next", command= lambda: btnFunction())
 
@@ -86,7 +108,7 @@ while True:
 
     #handles bst logic
     if mid_value == value:
-        limit_reached = True #we have reached the correct value
+        search_finished = True #we have reached the correct value
         is_found = True #we have found it
     elif mid_value < value: 
         low = mid + 1 #clearly our term must be to the right of the middle value then
@@ -97,10 +119,10 @@ while True:
 
     #stop condition
     if low >= high:
-        limit_reached = True
+        search_finished = True
 
     #stop and print the no of steps and whether the value was found or not
-    if limit_reached:
+    if search_finished:
         print("No of steps: ", i)
         print("Was found: ", is_found)
         break
