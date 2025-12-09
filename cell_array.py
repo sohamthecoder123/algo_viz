@@ -52,7 +52,7 @@ class CellArray:
         for child_cell in self.bg.winfo_children():
             child_cell.destroy()
 
-        self.root.after(10, self.render) #render it again after a short delay to prevent the jitter when the objects are deleted from becoming noticeable
+        #self.root.after(10000000000, self.render) #render it again after a short delay to prevent the jitter when the objects are deleted from becoming noticeable
 
         for i in range(len(self.array)):
             current_style = self.cell_params.copy()

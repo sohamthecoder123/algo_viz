@@ -3,8 +3,6 @@ from cell_array import CellArray
 
 '''
 main file
-
-Currently I haven't integrated it w/ tkinter - Soham
 '''
 
 root = tk.Tk()
@@ -16,7 +14,7 @@ label.pack(padx = 20, pady = 20)
 
 array_test = [1, 2, 3, 4, 5, 6, 7, 8, 9] #array on which the bs algo is to be run
 
-value = 5 #the value being searched for 
+value = 2 #the value being searched for 
 
 i = 0 #index/no of steps
 
@@ -130,4 +128,4 @@ while True:
 '''
 
 
-root.mainloop() #ignore for now
+root.mainloop() 
